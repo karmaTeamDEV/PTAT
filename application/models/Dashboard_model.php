@@ -65,7 +65,9 @@ class Dashboard_model extends CI_Model {
 	}
 
 
-if($active_only){
+function select_all_transaction_by_company($level_id,$company_id,$status_id,$business_impact_id,$end_date,$active_only,$stage_id){
+
+			if($active_only){
 				$filter_sql.=" AND tran_status.status='1' ";
 			}
 
