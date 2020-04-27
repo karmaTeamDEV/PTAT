@@ -1,5 +1,5 @@
 <?php
-
+// echo "upload 1";
 class Dashboard_model extends CI_Model {
 		
 	function update_data_table($data, $filed, $id, $table){
