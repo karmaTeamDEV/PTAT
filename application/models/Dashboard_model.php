@@ -65,14 +65,15 @@ class Dashboard_model extends CI_Model {
 	}
 
 
-	function select_all_transaction_by_company($level_id,$company_id,$status_id,$business_impact_id,$end_date,$active_only,$stage_id){
-
-			if($active_only){
+if($active_only){
 				$filter_sql.=" AND tran_status.status='1' ";
 			}
 
 			if($end_date){
-				$filter_sql.=" AND tran_status.end_date<=".$this->db->escape($end_date)."";
+
+				//$filter_sql.=" AND (tran_status.end_date<=".$this->db->escape($end_date)." OR (tran_status.start_date<=".$this->db->escape($end_date)." AND tran_status.end_date IS NULL))";
+				$filter_sql.=" AND (tran_status.end_date<=".$this->db->escape($end_date)." OR (".$this->db->escape($end_date)." BETWEEN tran_status.start_date AND  tran_status.end_date) OR (tran_status.start_date<=".$this->db->escape($end_date)." AND tran_status.end_date IS NULL) )";
+
 			}
 			if($business_impact_id){
 				$filter_sql.=" AND tran_outcomes.business_impact_id in (".$business_impact_id.")";
@@ -82,7 +83,23 @@ class Dashboard_model extends CI_Model {
 			}
 
 
-		 $sql = "SELECT tran_outcomes.id,tran_outcomes.outcomes,master_stages.color,tran_status.id as tran_status_id,
+		 $sql = "SELECT B.* FROM 
+
+(SELECT tran_outcomes.id, MAX(tran_status.id) AS tran_status_id
+				 
+		 		 FROM `tran_outcomes` 
+		 		 LEFT JOIN tran_status ON(tran_outcomes.id=tran_status.tran_outcome_id) 
+		 		 LEFT JOIN master_stages ON(tran_outcomes.stage_id=master_stages.id) 
+		 		 LEFT JOIN master_status ON(tran_status.status_id=master_status.id) 
+		 		 LEFT JOIN master_levels ON(tran_outcomes.level_id=master_levels.id)
+		 		 LEFT JOIN master_biz_impact ON(tran_outcomes.business_impact_id=master_biz_impact.id)
+		 		
+		 		 WHERE tran_outcomes.company_id=".$this->db->escape($company_id)."
+		 		 AND tran_outcomes.status='0'
+		 		 
+		 		 AND tran_outcomes.level_id=".$this->db->escape($level_id)." $filter_sql GROUP BY tran_outcomes.id) AS A
+JOIN 
+(SELECT tran_outcomes.id,tran_outcomes.outcomes,master_stages.color,tran_status.id as tran_status_id,
 				 tran_status.status_id,master_status.name,tran_status.start_date,tran_status.end_date,master_stages.stage,master_levels.level,master_biz_impact.business_impact, tran_status.status as outcome_status,tran_outcomes.description
 				 
 		 		 FROM `tran_outcomes` 
@@ -95,7 +112,8 @@ class Dashboard_model extends CI_Model {
 		 		 WHERE tran_outcomes.company_id=".$this->db->escape($company_id)."
 		 		 AND tran_outcomes.status='0'
 		 		 AND tran_status.status_id=".$this->db->escape($status_id)."
-		 		 AND tran_outcomes.level_id=".$this->db->escape($level_id)." $filter_sql";
+		 		 AND tran_outcomes.level_id=".$this->db->escape($level_id)." $filter_sql) AS B
+ON A.tran_status_id=B.tran_status_id";
 		 	//echo  $sql."<br><br>" ;//exit;
 		 $query = $this->db->query($sql);
 		 return $query->result_array();
