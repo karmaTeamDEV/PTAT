@@ -17,7 +17,7 @@ class ProgressReport extends REST_Controller {
 
    
 
-   function get_progress_report_post(){
+  function get_progress_report_post(){
 
    $company_id =  $this->post('company_id');
    $end_date =  $this->post('date');
@@ -89,7 +89,6 @@ class ProgressReport extends REST_Controller {
                                                  </div>';
 
         // ==================================== MOdal Start ================================//
-  //                                 <label style="text-transform: uppercase;"> '.$value['outcomes'].'-BO:'.$value['business_impact'].'/STAGE:'.$value['stage'].'/LEVEL:'.$value['level'].'</level>
 
                                 $html_dataset.='<div class="modal fade bd-example-modal-lg" id="exampleModalLong'.$value['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                    <div class="modal-dialog modal-lg">
@@ -99,7 +98,7 @@ class ProgressReport extends REST_Controller {
                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                    <span aria-hidden="true">&times;</span>
                                    </button>
-                                   <label style="text-transform: uppercase;"> '.$value['outcomes'].' - '.$value['level'].'</level>
+                                   <label style="text-transform: uppercase;"> '.$value['outcomes'].'-BO:'.$value['business_impact'].'/STAGE:'.$value['stage'].'/LEVEL:'.$value['level'].'</level>
                                    </div>
                                    <form>
                                    <div class="modal-body" style="height:600px;">
@@ -115,7 +114,7 @@ class ProgressReport extends REST_Controller {
                                   
                                    </ul>';
                                  }else{
-                                  $html_dataset.='<li class="active"><a data-toggle="tab" href="#menu1'.$value['id'].'">History</a></li>      
+                                  $html_dataset.='<li class="active"><a data-toggle="tab" href="#menu1'.$value['id'].'">Status History</a></li>      
                                       <li><a data-toggle="tab" href="#menu2'.$value['id'].'">Comments</a></li> ';
                                  }
 
@@ -237,88 +236,88 @@ class ProgressReport extends REST_Controller {
                                    <table class="table">
 
                                    <thead>
+                                   
                                    <tr>
-                                   <th>Type</th>
+                                   <th>Status</th>
+                                   <th>Start Date</th>
+                                   <th>End Date</th>
                                    <th>Note</th>
-                                   <th width="25%">Added date</th>
-                                   <th width="15%">Added By</th>  
+                                   <th>Added By</th>  
                                    </tr>
+                                   <tr><td colspan="5" align="center"><b>Status History</b></td></tr>
                                    </thead>
                                    <tbody>';
-                                   $history = $this->Dashboard_model->select_all_comment_by_outcome_id($value['id']);
+                                   $history = $this->Dashboard_model->select_all_history_by_outcome_id($value['id']);
 
                                    if(empty($history)){
                                      $html_dataset.=' <tr>
                                      <td >'.$message.'</td>              
                                      </tr>';
                                    }
-                                  // echo "<pre>";print_r($history);
+
                                    foreach ($history as $key => $list) {
-                                    $start_date1='';
                                      if($list['start_date'] != NULL){
                                       $start_date1 =date('m/d/Y', strtotime($list['start_date']));
                                     }else{
                                       $start_date1 ='';
                                     }
-$end_date1 ='';
+
                                     if($list['end_date'] != NULL){
                                       $end_date1 =date('m/d/Y', strtotime($list['end_date']));
-                                      $date_str=$start_date1." - ".$end_date1;
                                     }else{
                                       $end_date1 ='';
-                                      $date_str=$start_date1;
                                     } 
-                                   // echo "<br>".$value['outcomes']." : $date_str : ".$start_date1." -- ".$end_date1;
-                                    $added_date='';
-                                      if($list['added_date'] != NULL){
-                                        $added_date=date('m/d/Y H:i:s', strtotime($list['added_date']));
-                                        }else{
-                                        $added_date='';
-                                        }
-                                       if($list['addBy'] == NULL){
-                                        $list['addBy']='';
-                                        }
-                                 
-                                    if($list['row_type']=="Comment"){
-                                       $html_dataset.=' <tr>
-                                      <td>'.$list['row_type'].'</td>
-                                      <td>'.$list['note'].'</td>
-                                      <td>'.$added_date.'</td>
-                                      <td>'.$list['addBy'].'</td>
-                                      </tr>';
-                                    }
-                                    if($list['row_type']=="Status"){
-                                       $html_dataset.=' <tr>
-                                      <td>'.$list['NAME'].' ('.$date_str.')</td>
-                                      <td>'.$list['note'].'</td>
-                                      <td>'.$added_date.'</td>
-                                      <td>'.$list['addBy'].'</td>
-                                      </tr>';
-                                    }
-                                    if($list['row_type']=="Color"){
-                                      //echo "<pre>";print_r($list);
-                                      if($list['NAME']=="GREEN"){
-                                        $oval_cl = 'oval_green';
-                                      }else if($list['NAME']=='RED'){
-                                         $oval_cl= 'oval_red';
-                                      }else if($list['NAME']=='YELLOW'){
-                                         $oval_cl = 'oval_yellow';
-                                      }else if($list['NAME']=='WHITE'){
-                                         $oval_cl = 'oval_white';
-                                      }
-                                      // echo "<pre>$oval_cl";print_r($list);
-                                      $html_dataset.=' <tr>
-                                      <td><div><div style="height: 20px; width: 40px;float: left;" class="'.$oval_cl.'"></div> <div style="float: left; padding-left: 5px;">  ('.$date_str.')</div></div></td>
-                                      <td> '.$list['note'].' </td>
-                                      <td>'.$added_date.'</td>
-                                      <td>'.$list['addBy'].'</td>
-                                      </tr>';
-                                    }
-                                  } 
-                                  
-                                  
 
-                                  
+                                    $html_dataset.=' <tr>
+                                    <td>'.$list['name'].'</td>
+                                    <td>'.$start_date1.'</td>
+                                    <td>'.$end_date1.'</td>
+                                    <td>'.$list['note'].'</td>
+                                    <td>'.$list['add_by'].'</td>
+
+                                    </tr>';
+                                  } 
+                                  $html_dataset.=' <tr><td colspan="5" align="center"><b>Color History</b></td></tr>';
+                                  $color_history = $this->Dashboard_model->select_all_color_history_by_outcome_id($value['id']);
+
+                                   if(empty($color_history)){
+                                     $html_dataset.=' <tr>
+                                     <td >'.$message.'</td>              
+                                     </tr>';
+                                   } 
+
+                                   foreach ($color_history as $key => $list1) {
+                                     if($list1['start_date'] != NULL){
+                                      $start_date1 =date('m/d/Y', strtotime($list1['start_date']));
+                                    }else{
+                                      $start_date1 ='';
+                                    }
+
+                                    if($list1['end_date'] != NULL){
+                                      $end_date1 =date('m/d/Y', strtotime($list1['end_date']));
+                                    }else{
+                                      $end_date1 ='';
+                                    } 
+
+                                     if($list1['name']=='GREEN'){
+                                      $oval_cl = 'oval_green';
+                                    }else if($list1['name']=='RED'){
+                                       $oval_cl = 'oval_red';
+                                    }else if($list1['name']=='YELLOW'){
+                                       $oval_cl = 'oval_yellow';
+                                    }else if($list1['name']=='WHITE'){
+                                       $oval_cl = 'oval_white';
+                                    }
+
+                                    $html_dataset.=' <tr>
+                                    <td><div class="'.$oval_cl.'"></div></td>
+                                    <td>'.$start_date1.'</td>
+                                    <td>'.$end_date1.'</td>
+                                    <td>'.$list1['note'].'</td>
+                                    <td>'.$list1['add_by'].'</td>
+
+                                    </tr>';
+                                  } 
                                   $html_dataset.=' </tbody>
                                   </table>
                                   </div>
@@ -580,6 +579,7 @@ $end_date1 ='';
          </div>';
  echo $html_dataset;
  }
+
 
 
   function select_all_outcomeList_by_level_id_post(){

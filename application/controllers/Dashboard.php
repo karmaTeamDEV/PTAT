@@ -56,7 +56,9 @@ class Dashboard extends CI_Controller {
 	} 
 
 	public function progress_report_new(){		
-		//echo "<pre>";print_r($_SESSION);exit;
+
+		$data['current_date'] = date('Y-m-d');
+
 		$data['current_month'] = date('Y-m-01');
 		$data['previous_month'] = date('Y-m-01', strtotime(date('Y-m')." -1 month"));
 		$data['previous_next_month'] = date('Y-m-01', strtotime('-2 MONTH'));
@@ -464,10 +466,11 @@ class Dashboard extends CI_Controller {
 	
 	public function login_logout_history()
 	{	
-		$company_id = $_SESSION['company_id'];		 
-		$data['all_login_logout_history'] = $this->Dashboard_model->select_all_login_logout_history();		 	 
+		//$data['company_id'] = $_SESSION['company_id'];		 
+		//$data['all_login_logout_history'] = $this->Dashboard_model->select_all_login_logout_history();		 	 
 		$this->load->view('view_login_logout_history',$data);
 	}
+	
 
 
 	

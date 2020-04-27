@@ -62,7 +62,9 @@ class Member extends CI_Controller {
 					/// ------- User Activity End--- ///////////// 
 
 					$this->session->set_userdata($newdata);			 
-					redirect(site_url.'Dashboard/progress_report_new');exit;
+					//redirect(site_url.'Dashboard/progress_report_new');exit;
+				redirect(site_url.'member/logging');exit;
+					
 				}else{
 					$_SESSION['err_msg'] = "Activate your account and login again.";
 					$this->load->view('login' , $data);
@@ -78,6 +80,10 @@ class Member extends CI_Controller {
 		 	$this->load->view('login' , $data);
 		 }
 		 
+
+	}
+	public function logging(){
+		$this->load->view('logging' , $data);
 
 	}
 	

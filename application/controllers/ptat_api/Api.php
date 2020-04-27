@@ -409,12 +409,13 @@ class Api extends REST_Controller {
             $this->response($list, 404);
         }
     }
-   function select_all_comment_action_by_outcome_id_post(){ 
+	
+	function select_all_login_logout_history_post(){ 
                  
         if($this->post())
         {           
-            $data['outcome_id'] = $_POST['outcome_id'];   
-            $myarray =  $this->Dashboard_model->select_all_comment_action_by_outcome_id($data['outcome_id']);
+            //$data['outcome_id'] = $_POST['outcome_id'];   
+            $myarray =  $this->Dashboard_model->select_all_login_logout_history();
             $this->response($myarray, 200); // 200 being the HTTP response code
         }
         else
@@ -423,6 +424,7 @@ class Api extends REST_Controller {
             $this->response($list, 404);
         }
     }
+
 
    //   function get_all_users_by_companyid_get(){               
         

@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	setTimeout( function(){ 
     // Do something after 1 second 
-    //console.log("Hello world!");
+    console.log("Hello world!");
     window.location.assign("<?php echo base_path;?>index.php/Dashboard/progress_report_new")
   }  , 10000 );
 </script>

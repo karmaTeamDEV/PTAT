@@ -31,7 +31,7 @@ class Dashboard_model extends CI_Model {
 		          //echo $sql;
 		 $query = $this->db->query($sql);
 		 return $query->result_array();
-	}
+	} 
 
 	function select_all_company_biz($company_id){
 
@@ -245,30 +245,6 @@ WHERE tran_outcomes.company_id=".$this->db->escape($company_id)." AND master_lev
 			// 	WHERE outcome_comments.tran_outcome_id=".$this->db->escape($outcome_id)."
    //              ORDER by outcome_comments.added_date DESC";
 
-		$sql="SELECT A.* FROM(
-				SELECT outcome_comments.note,outcome_comments.added_date,concat(users.first_name,' ',users.last_name) as addBy
-					FROM `outcome_comments`               
-				    LEFT JOIN users ON(outcome_comments.added_by=users.id)         
-					WHERE outcome_comments.tran_outcome_id=".$this->db->escape($outcome_id)."
-
-				UNION ALL
-				
-				SELECT comment,add_date,concat(users.first_name,' ',users.last_name) as addBy
-				 FROM spider_chart_data 
-				 LEFT JOIN users ON(spider_chart_data.added_by=users.id)
-				 WHERE outcome_id =".$this->db->escape($outcome_id)." AND comment != '') as A
-				 ORDER BY A.added_date DESC";
-		 $query = $this->db->query($sql);
-		 return $query->result_array();
-	}	
-	function select_all_comment_action_by_outcome_id($outcome_id){
-
-		 // $sql = " SELECT outcome_comments.note,outcome_comments.added_date,concat(users.first_name,' ',users.last_name) as addBy
-			// 	FROM `outcome_comments`               
-   //              LEFT JOIN users ON(outcome_comments.added_by=users.id) 
-			// 	WHERE outcome_comments.tran_outcome_id=".$this->db->escape($outcome_id)."
-   //              ORDER by outcome_comments.added_date DESC";
-
 		
 
 				$sql= "SELECT A.* FROM(
@@ -300,7 +276,7 @@ SELECT 'Status' AS row_type,master_status.name,tran_status.`note` ,tran_status.`
 				 
 				 ) AS A
 				 ORDER BY A.added_date DESC";
-				 //echo $sql."<br><br>";
+				 //echo $sql;
 		 $query = $this->db->query($sql);
 		 return $query->result_array();
 	}	
@@ -544,7 +520,6 @@ JOIN master_stages AS stg ON(erd.stage_id=stg.id) WHERE erd.company_id='1' ORDER
 		 $query = $this->db->query($sql);
 		 return $query->result_array();
 	}
-
 	function select_all_login_logout_history($company_id="",$login_id=""){
 		$ssql ='';
 		if($company_id){
@@ -560,6 +535,7 @@ JOIN master_stages AS stg ON(erd.stage_id=stg.id) WHERE erd.company_id='1' ORDER
 				LEFT JOIN users ON(user_activity.login_id=users.id) 
 				LEFT JOIN master_company ON(users.company_id=master_company.id) 
 				WHERE 1
+				order by user_activity.id DESC
 		 		$ssql  "; 
 		 //echo $sql;
 		 $query = $this->db->query($sql);

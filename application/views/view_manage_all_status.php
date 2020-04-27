@@ -133,7 +133,7 @@
                          <tr><td colspan="5" align="center"><b>Color History</b></td></tr>
                          <tbody id="color_id">  </tbody>
                        </table> </div> </div>  
-                </div>
+                </div>-->
                 <div id="menu2" class="tab-pane fade">
                    <div class="table-responsive" style="height:500px; overflow-y:scroll;"> 
                     <table class="table">
@@ -141,7 +141,7 @@
                         <th width="20%">  Added By</th><th>Added date</th></tr></thead>
                         <tbody id="comment_id"></tbody>
                       </table></div>
-                </div>-->
+                </div>
               </div>
 
             </div>
@@ -425,7 +425,7 @@ function select_all_comment_by_outcome_id(outcome_id){
 //console.log(outcome_id);
   $.ajax({
        type: "POST",
-       url: '<?php echo site_url;?>ptat_api/Api/select_all_comment_action_by_outcome_id',
+       url: '<?php echo site_url;?>ptat_api/Api/select_all_comment_by_outcome_id',
        data: { <?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash(); ?>',outcome_id: outcome_id} ,
        async: false ,
        })
@@ -441,8 +441,7 @@ function select_all_comment_by_outcome_id(outcome_id){
              // if(datalist[j]['note']){
 
                 if(datalist[j]['added_date'] != null){
-                  //var added_date =datetimeFormat(datalist[j]['added_date']);
-                  var added_date = set_time_zone_print(datetimeFormat(datalist[j]['added_date']), 'UTC+05:30');
+                  var added_date =datetimeFormat(datalist[j]['added_date']);
                 }else{
                   var added_date ='';
                 }

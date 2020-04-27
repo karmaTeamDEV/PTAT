@@ -53,7 +53,7 @@
 
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="all_login_logout_history"><!-- 
                   <?php if(!empty($all_login_logout_history))
                   {
                     foreach ($all_login_logout_history as $value)
@@ -66,15 +66,13 @@
                           <td><?=$value['timezone']?></td>         
                           <td><?=$value['start_time']?></td>   
                           <td><?=$value['end_time']?></td>   
-                          <td><?php $date_n = new DateTime($value['start_time'], new DateTimeZone('Europe/Dublin'));   
-
-                          print_r( $date_n); ?></td>                         
+                          <td></td>                         
                           
 
                         </tr> 
                         <?php 
                       }
-                    }?>
+                    }?> -->
                   </tbody>
                 </table>
 
@@ -93,11 +91,54 @@
 <!-- footer content -->
 <?php include('include/footer.php'); ?>
 <!-- /footer content -->
-<script type="text/javascript">
-  
-   $('#tbl_user').DataTable({
-       "pageLength": 50
-   });
+<script type="text/javascript"> 
+ $('#tbl_user').DataTable({
+     "pageLength": 50
+ });
+
+select_login_logout_history();
+ function select_login_logout_history(){
+//console.log(outcome_id);
+  $.ajax({
+       type: "POST",
+       url: '<?php echo site_url;?>ptat_api/Api/select_all_login_logout_history',
+       data: { <?php echo $this->security->get_csrf_token_name(); ?>:'<?php echo $this->security->get_csrf_hash(); ?>'} ,
+       async: false ,
+       })
+       .success(function (datalist, textStatus, xhr){  
+       $("#all_login_logout_history").empty();  
+         if(datalist.length == 0){
+             $("#all_login_logout_history").append('<tr><td colspan="3" align="center">No record found. </td></tr>');
+         }
+                                     
+         for (j = 0; j < datalist.length; j++)
+            { 
+
+              if(datalist[j]['start_time']){
+                var start_time =  set_time_zone_print(datetimeFormat(datalist[j]['start_time']), 'UTC+05:30');
+              }else{
+                var start_time = '';
+              }
+
+              if(datalist[j]['end_time']){
+                 var end_time = set_time_zone_print(datetimeFormat(datalist[j]['end_time']), 'UTC+05:30');
+                 var timeDiff =timeDiffCalc(new Date(start_time), new Date(end_time));
+                 
+              }else{
+                var end_time = '';
+                 var timeDiff ='';
+              } 
+
+              $("#all_login_logout_history").append("<tr><td  >"+datalist[j]['username']+" </td><td  >"+datalist[j]['company_name']+" </td><td  >"+datalist[j]['ip_address']+" </td><td  >"+datalist[j]['timezone']+" </td><td  >"+start_time+" </td><td align='left'>"+end_time+"</td><td> "+timeDiff+"</td></tr>");
+                }       
+                      
+            
+       })          
+       .fail(function (jqXHR, textStatus, errorThrown){
+           alert("Record Not found.");
+      });
+
+}
 
    
 </script>

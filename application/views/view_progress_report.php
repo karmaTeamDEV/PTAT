@@ -68,23 +68,27 @@
 <div class="row" style="padding-top:20px;">
   <div class="col-sm-1"></div>
    <div class="col-sm-1" style="line-height: 34px;">AS OF</div>
-  <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_next_next_month; ?>',<?php echo $business_impact_id?>,0,0,'<?php echo $colorView?>');">
+  <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_next_next_month; ?>','',0,0,'<?php echo $colorView?>');">
    <div>
      <div class="circle" id="<?php echo $previous_next_next_month; ?>"></div>
      <div><?php echo date('n/j/y', strtotime($previous_next_next_month)); ?></div>
    </div>
  </div>
- <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_next_month; ?>',<?php echo $business_impact_id?>,0,0,'<?php echo $colorView?>');">
+ <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_next_month; ?>','',0,0,'<?php echo $colorView?>');">
    <div class="circle" id="<?php echo $previous_next_month; ?>"></div>
    <div><?php echo date('n/j/y', strtotime($previous_next_month)); ?></div>
  </div>
- <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_month; ?>',<?php echo $business_impact_id?>,0,0,'<?php echo $colorView?>');">
+ <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $previous_month; ?>','',0,0,'<?php echo $colorView?>');">
    <div class="circle" id="<?php echo $previous_month; ?>"></div>
    <div><?php echo date('n/j/y', strtotime($previous_month)); ?></div>
  </div>
- <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $current_month; ?>',<?php echo $business_impact_id?>,0,0,'<?php echo $colorView?>');">
-   <div  class="circle current_cl" id="<?php echo $current_month; ?>"></div>
+ <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $current_month; ?>','',0,0,'<?php echo $colorView?>');">
+   <div  class="circle" id="<?php echo $current_month; ?>"></div>
    <div><?php echo date('n/j/y', strtotime($current_month)); ?></div>
+ </div>
+ <div class="col-sm-1" onclick="date_icon_click(<?php echo $company_id;?>,'<?php echo $current_date; ?>','',0,0,'<?php echo $colorView?>');">
+   <div  class="circle current_cl" id="<?php echo $current_date; ?>"></div>
+   <div><?php echo date('n/j/y', strtotime($current_date)); ?></div>
  </div>
  <div class="col-sm-4">
   <!-- <div class="pink_bot">
