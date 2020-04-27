@@ -1,10 +1,29 @@
+language: ruby
+
+install: echo "party time"
+
+script: echo "like it's cat meow 99" && true
+
+before_deploy:
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
+
 deploy:
-  provider: codedeploy
-  access_key_id: $AWSACCESSKEY
-  secret_access_key: $AWSSECRETKEY
-  bucket: $S3BUCKET
-  key: latest/MyApp.zip
-  bundle_type: zip
-  application: MyApp
-  deployment_group: MyDeploymentGroup
-  region: us-east-1
+  - provider: s3
+    access_key_id: $AWSACCESSKEY
+    secret_access_key: $AWSSECRETKEY
+    local_dir: dpl_cd_upload
+    skip_cleanup: true
+    on: 
+      repo: karmaTeamDEV/PTAT
+    bucket: $S3BUCKET
+  - provider: codedeploy
+    access_key_id: $AWSACCESSKEY
+    secret_access_key: $AWSSECRETKEY
+    bucket: $S3BUCKET
+    key: latest.zip
+    bundle_type: zip
+    application: P2A_Code_Deploy
+    deployment_group: DG1
+    
