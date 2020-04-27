@@ -1,0 +1,380 @@
+@charset "utf-8";
+/* CSS Document */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.oval_green {
+  height: 25px;
+  width: 50px;
+  background-color: #61d836;
+  border-radius: 50%;
+}
+
+.oval_yellow {
+  height: 25px;
+  width: 50px;
+  background-color: #fae232;
+  border-radius: 50%;
+}
+
+.oval_red {
+  height: 25px;
+  width: 50px;
+  background-color: #ee220c;
+  border-radius: 50%;
+}
+
+.oval_white {
+  height: 25px;
+  width: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #5f6a4d; 
+}
+
+.cl_yellow{
+    background-color: #fae232;
+    color: #5f6a4d !important;
+   
+}
+.cl_green{
+    background-color: #61d836;
+    color: #fff;
+   /* font-weight: 600;*/
+}
+.cl_red{
+    background-color: #ee220c;
+    color: #fff;
+   
+}
+.cl_white{
+    background-color: #fff;
+    color: #5f6a4d !important;
+    border: 1px solid #5f6a4d;
+    
+}
+.current_cl{
+  background-color: #fed10a !important;
+}
+.box_botton_border{
+  border-bottom: 5px solid #fed10a;
+}
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.btn_gray{
+     background-color: #666 !important;
+     color: #fff !important;
+     border: 1px solid #666 !important;
+     cursor: pointer;
+   }
+ .btn_yellow{
+     background-color: #fed10a !important;
+     color: #000 !important;
+     border: 1px solid #fed10a !important;
+     cursor: pointer;
+   }
+  
+
+
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+.bot1
+{
+/*background-color:#fed10a;*/
+font-size:11px;
+padding:4px 0px;
+text-align:center;
+min-width:137px;
+border-radius:5px;
+font-weight:bold;
+float:left;
+margin-right:5px;
+margin-bottom:3px;
+}
+.bot2
+{
+background-color:#fed10a;
+font-size:11px;
+padding:4px 0px;
+text-align:center;
+min-width:137px;
+border-radius:5px;
+font-weight:bold;
+float:left;
+margin-right:5px;
+border:2px solid #000;
+color:#000;
+margin-bottom:3px;
+
+}
+.text1
+{color:#5e5e5e;font-weight:400;}
+.col-md-55, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+padding-left:7px!important;
+padding-right:7px!important;
+}
+.part1
+{
+width:3%;float:left;
+}
+
+.part2
+{
+width:97%;float:left;
+}
+.grey_portion
+{
+width:25%;
+float:left;
+border-right:1px dotted #fff;
+}
+.grey
+{
+background-color:#a1a4ae;
+color:#fff;
+text-align:center;
+font-size:22px;
+vertical-align:middle;
+padding:2px 0px;
+width:96%;
+margin-left:2%;
+margin-right:2%;
+
+}
+.portion
+{
+min-height:100px;
+width:25%;
+float:left;
+border-right:1px dotted #000;
+}
+.side_bot_space
+{
+width:35px;
+height:90px;
+background-color:#0e9ca6;
+padding:2px;
+color:#fff;
+text-align:center;
+margin-top:5px;
+
+}
+
+.line
+{
+border-bottom:1px dotted #000;width:100%;float:left;
+}
+.side_bot{
+transform: rotate(270deg);
+transform-origin: 100% 100%;
+padding:2px;
+max-width:36px;
+font-weight:bold;
+font-size:14px;
+line-height:15px;
+  
+}
+.a3
+{
+display:table-cell;
+vertical-align: middle;
+}
+.bot_inner
+{
+padding-left:7px;
+padding-right:4px;
+}
+.bot_inner2
+{
+width:98%;margin-left:1%;margin-right:1%;
+}
+.blue_botton
+{
+width:48%;
+margin-right:1%;margin-left:1%;
+padding:2px 0px;color:#fff;
+float:left;
+margin-top:5px;
+display:table;
+height:43px;
+font-size:14px;
+line-height:18px;
+}
+
+.blue_botton_text
+{
+display:table-cell;
+text-align: center;
+vertical-align: middle;
+}
+
+.blue1
+{background-color:#97a4ca;}
+.blue2
+{background-color:#667db1;}
+.blue3
+{background-color:#2b5597;}
+.blue4
+{background-color:#202845;
+}
+.blue5
+{background-color:#c0c8e0;
+}
+.red_botton
+{
+width:48%;
+margin-right:1%;margin-left:1%;
+padding:2px 0px;color:#fff;
+float:left;
+margin-top:5px;
+display:table;
+height:45px;
+font-size:14px;
+line-height:20px;
+}
+.red_botton_text
+{
+display:table-cell;
+text-align: center;
+vertical-align: middle;
+}
+.red1
+{
+background-color:transparent;
+border-bottom:5px solid #F00;
+color:#000;
+}
+
+.lower_bottom
+{border-radius:5px 5px 0px 0px;text-align:center;color:#fff;
+}
+.pink_bot
+{background-color:#ef5fa7;padding:3px 5px;font-size:16px;color:#000;font-weight:bold;text-align:center;
+}
+.circle
+{width:20px;height:20px;border-radius:50%;background-color:#c0c8e0;margin-left:10px;margin-top:5px;}
+
+@media (max-width:1024px)
+
+{
+.bot1
+{
+font-size:8px;
+padding:5px 0px;
+text-align:center;
+min-width:103px;
+margin-right:3px;
+}
+.bot2
+{
+font-size:8px;
+padding:5px 0px;
+text-align:center;
+min-width:103px;
+margin-right:3px;
+}
+.grey_portion
+{
+width:25%;
+float:left;
+}
+.grey
+{
+width:94%;
+margin-left:3%;
+margin-right:3%;
+}
+
+.grey_bot
+{
+font-size:16px;
+padding:5px 0px;
+}
+.side_bot_space
+{
+    width:23px;
+  height:70px;
+}
+.side_bot{
+transform-origin: 80% 80%;
+max-width:36px;
+margin-top:20px;
+font-size:10px;
+line-height:11px;
+margin-left:-5px;
+font-weight:bold;
+height:19px;
+width:20px;
+}
+
+
+.bot_inner
+{
+width:86%;float:left;
+}
+
+.bot_inner2
+{
+width:98%;margin-right:1%;margin-left:1%;
+}
+
+.top_part1
+{width:34%;
+}
+
+.portion
+{.portion
+{
+min-height:76px;
+}
+.blue_botton
+{
+height:30px;
+font-size:10px;
+line-height:13px;
+}
+}
