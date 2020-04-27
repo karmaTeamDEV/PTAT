@@ -598,6 +598,7 @@ $(document).ready(function() {
       $('#email').val('');    
       $('#password').val('');
       $('#role').val('');
+      $('#user_id').val('');
       $('#user_status').val('0');  
       $("#btn_add_update_user").attr("disabled", false); 
  
@@ -706,9 +707,10 @@ function add_update_biz_impact(){
       setTimeout(function() { $("#biz_error_msg").slideUp(1000); }, 3500);
       $('#business_impact').val('');
       $('#measure').val('');
-      $('#biz_ordering').val('');    
+      $('#biz_ordering').val(0);    
       $('#biz_description').val('');           
       $('#biz_status').val('0');
+      $('#biz_id').val('');
       $("#btn_add_update_biz_impact").attr("disabled", false);
 
     ////////////////////Reload datatable start//////////////////////
@@ -789,9 +791,10 @@ function add_update_company_level(){
           $('#level_error_msg').show();
           setTimeout(function() { $("#level_error_msg").slideUp(1000); }, 3500);
           $('#level').val('');            
-          $('#level_ordering').val('');    
+          $('#level_ordering').val(0);    
           $('#level_description').val('');           
           $('#level_status').val('0');
+          $('#level_id').val('');
           $("#btn_add_update_company_level").attr("disabled", false);
 
           ////////////////////Reload datatable start//////////////////////
@@ -935,7 +938,8 @@ function add_update_outcome(){
           $('#outcome_level_id').val('');
           $('#outcomes').val('');
           $('#outcome_status_id').val('');
-          $('#color_id').val('');    
+          $('#color_id').val('');   
+          $('#outcome_id').val(''); 
           $("#btn_add_update_outcome").attr("disabled", false);            
            ////////////////////Reload datatable start//////////////////////
           $("#outcometbl").DataTable().clear();     
