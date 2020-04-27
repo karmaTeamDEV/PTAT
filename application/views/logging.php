@@ -9,13 +9,13 @@
 <body>
 
 <div align="center" style="margin-top:20px;"><img src="<?php echo base_path;?>images/chart1.gif" width="800" alt=""></div>
-<div align="center"><h1 style="font-family:Arial, Helvetica, sans-serif;">Logging you in ...</h1></div>
+<div align="center"><h1 style="font-family:Arial, Helvetica, sans-serif;">555Logging you in ...</h1></div>
 </body>
 </html>
 <script type="text/javascript">
 	setTimeout( function(){ 
     // Do something after 1 second 
-    console.log("Hello world!");
+    //console.log("Hello world!");
     window.location.assign("<?php echo base_path;?>index.php/Dashboard/progress_report_new")
   }  , 10000 );
 </script>
