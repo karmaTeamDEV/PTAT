@@ -55,7 +55,7 @@
           </div>
           </div>
 
-   <div id="load"></div>
+   <div id="load" style="display: none;"></div>
     
 <!-- Replace whole html part start-->  
 <div id="result_div_id"></div>
@@ -138,13 +138,17 @@ $( document ).ready(function() {
   // Handler for .ready() called.
   //alert(1);
   //  document.getElementById('contents').style.visibility="visible";
-$('#load').show(); 
+<?php if($biz_impact){   ?>
+ 
+  $('#load').show(); 
   date_icon_click(<?php echo $company_id;?>,'',<?php echo $business_impact_id?>,1,0,'<?php echo $colorView?>');
+
+ <?php  } ?>
   //alert(2);
 });
  
   function date_icon_click(company_id,date,business_impact_id,active_only,stage_id,colorView){
-    
+    $('#load').show(); 
 
    if(date){
     $("#end_date").val(date);
