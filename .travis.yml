@@ -1,29 +1,24 @@
-language: ruby
+language: php
+dist: trusty
+sudo: required
 
-install: echo "party time"
-
-script: echo "like it's cat meow 99" && true
-
-before_deploy:
-  - zip -r latest *
-  - mkdir -p dpl_cd_upload
-  - mv latest.zip dpl_cd_upload/latest.zip
-
-deploy:
-  - provider: s3
-    access_key_id: $AWSACCESSKEY
-    secret_access_key: $AWSSECRETKEY
-    local_dir: dpl_cd_upload
-    skip_cleanup: true
-    on: 
-      repo: karmaTeamDEV/PTAT
-    bucket: $S3BUCKET
-  - provider: codedeploy
-    access_key_id: $AWSACCESSKEY
-    secret_access_key: $AWSSECRETKEY
-    bucket: $S3BUCKET
-    key: latest.zip
-    bundle_type: zip
-    application: P2A_Code_Deploy
-    deployment_group: DG1
-    
+php:
+  - '5.6'
+ 
+services:
+  - mysql
+ 
+env:
+  - CI_ENV=testing
+ 
+before_install:
+  - sudo apt-get install lftp
+  
+before_script:
+  - chmod 0777 ./bin/test.sh
+  - chmod 0777 ./bin/deploy.sh
+ 
+script: ./bin/test.sh
+ 
+after_success:
+  - ./bin/deploy.sh
