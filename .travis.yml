@@ -16,9 +16,9 @@ before_install:
   
 before_script:
   - chmod 0777 ./bin/test.sh
-  - chmod 0777 ./bin/old_deploy.sh
+  - chmod 0777 ./bin/deploy.sh
  
 script: ./bin/test.sh
  
 after_success:
-  - ./bin/old_deploy.sh
+  - ./bin/deploy.sh
